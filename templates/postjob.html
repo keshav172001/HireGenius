@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block title %}Post a Job{% endblock %}
+
+{% block content %}
+<div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md mt-10">
+    <h2 class="text-xl font-bold text-gray-800 mb-4">Post a Job</h2>
+    <form action="/post_job" method="post">
+        <input type="text" name="title" placeholder="Job Title" class="block w-full border p-2 rounded-lg mb-2" required>
+        <textarea name="description" placeholder="Job Description" class="block w-full border p-2 rounded-lg mb-2" required></textarea>
+        <input type="text" name="company" placeholder="Company Name" class="block w-full border p-2 rounded-lg mb-2" required>
+        <input type="text" name="location" placeholder="Location" class="block w-full border p-2 rounded-lg mb-2" required>
+        <button type="submit" class="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-700">Post Job</button>
+    </form>
+</div>
+{% endblock %}

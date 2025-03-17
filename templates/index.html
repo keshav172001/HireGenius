@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}Dashboard - Job Matcher{% endblock %}
+
+{% block content %}
+<div class="text-center mt-10">
+    <h1 class="text-3xl font-bold text-gray-800">Hello, {{ user.email }}!</h1>
+
+    <div class="mt-8">
+        {% if user.role == "job_seeker" %}
+            <a href="/dashboard" class="px-6 py-3 bg-blue-500 text-white rounded-md shadow hover:bg-blue-700">Explore Jobs</a>
+        {% elif user.role == "recruiter" %}
+            <a href="/post_job" class="px-6 py-3 bg-green-500 text-white rounded-md shadow hover:bg-green-700">Post Job</a>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}

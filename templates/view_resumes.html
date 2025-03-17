@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2 class="text-2xl font-bold">{{ job.title }}</h2>
+
+{% if resumes %}
+    {% for resume, email in resumes %}
+    <div class="p-4 border rounded shadow bg-white mt-4">
+        <h3 class="font-bold">{{ email }}</h3>
+        <p>{{ resume.summary }}</p>
+        <p>Score: {{ resume.score }}</p>
+        <a href="{{ url_for('routes.download_resume', resume_id=resume.id) }}" 
+           class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700" 
+           target="_blank">
+           Download Resume
+        </a>
+    </div>
+    {% endfor %}
+{% else %}
+    <p class="mt-4 text-gray-600">No resumes have been submitted for this job yet.</p>
+{% endif %}
+{% endblock %}

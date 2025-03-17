@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}Upload Resume{% endblock %}
+
+{% block content %}
+<div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md mt-10">
+    <h2 class="text-xl font-bold text-gray-800 mb-4">Upload Your Resume</h2>
+    <form action="{{ url_for('routes.upload_resume', job_id=job_id) }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" class="block w-full border p-2 rounded-lg" required>
+        <button type="submit" class="mt-4 w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-700">Upload</button>
+    </form>
+</div>
+
+<script>
+    function showPopup(message, status) {
+        if (message) {
+            alert(message);
+            if (status === "success") {
+                window.location.href = "{{ url_for('routes.dashboard') }}";
+            }
+        }
+    }
+</script>
+
+<body onload="showPopup('{{ message }}', '{{ status }}')"></body>
+{% endblock %}

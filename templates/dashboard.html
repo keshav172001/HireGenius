@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-6">
+
+    <h1 class="text-2xl font-bold mb-4">Welcome, {{ current_user.email }}</h1>
+
+    {% if current_user.role == "recruiter" %}
+    <!-- Recruiter View: Show Only Their Posted Jobs -->
+    <h2 class="text-xl font-semibold mb-2">Your Posted Jobs</h2>
+    <a href="{{ url_for('routes.post_job') }}" class="bg-green-500 text-white px-3 py-2 rounded mb-4 inline-block">Post a New Job</a>
+
+    {% if jobs %}
+        {% for job in jobs %}
+        <div class="p-4 border rounded shadow bg-white mb-4">
+            <h3 class="text-lg font-bold">{{ job.title }}</h3>
+            <p>{{ job.description }}</p>
+            <p class="text-sm text-gray-500">{{ job.company }} - {{ job.location }}</p>
+            <a href="{{ url_for('routes.view_resumes', job_id=job.id) }}" class="bg-blue-500 text-white px-3 py-1 rounded mt-2">View Submitted Resumes</a>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-gray-500">No jobs posted yet.</p>
+    {% endif %}
+
+    {% else %}
+    <!-- Job Seeker View: See All Jobs -->
+    <h2 class="text-xl font-semibold mb-2">Available Jobs</h2>
+
+    {% if jobs %}
+        {% for job in jobs %}
+        <div class="p-4 border rounded shadow bg-white mb-4">
+            <h3 class="text-lg font-bold">{{ job.title }}</h3>
+            <p>{{ job.description }}</p>
+            <p class="text-sm text-gray-500">{{ job.company }} - {{ job.location }}</p>
+            <a href="{{ url_for('routes.upload_resume', job_id=job.id) }}" class="bg-blue-500 text-white px-3 py-1 rounded mt-2">Apply</a>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-gray-500">No jobs available at the moment.</p>
+    {% endif %}
+
+    {% endif %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}Applied Jobs{% endblock %}
+
+{% block content %}
+<h2 class="text-2xl font-bold">Jobs You've Applied To</h2>
+
+{% if jobs %}
+    <div class="mt-4 space-y-4">
+        {% for job in jobs %}
+            <div class="p-4 border rounded-lg shadow bg-white">
+                <h3 class="text-lg font-bold text-blue-600">{{ job.title }}</h3>
+                <p class="text-gray-700">{{ job.description }}</p>
+                <p class="text-sm text-gray-500 font-semibold">Posted by: {{ job.company_name }}</p>
+
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p class="mt-6 text-gray-600 text-lg">You haven't applied for any jobs yet.</p>
+    <a href="{{ url_for('routes.dashboard') }}" 
+       class="mt-4 inline-block px-6 py-3 bg-blue-500 text-white rounded-md shadow hover:bg-blue-700">
+        Browse Available Jobs
+    </a>
+{% endif %}
+{% endblock %}
